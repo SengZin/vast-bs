@@ -1,0 +1,23 @@
+n/
+*.iml
+.idea
+target/
+out/
+.settings/
+.project
+.classpath
+*.log
+*.log.*
+logs/
+.metadata/
+install.bat
+run.bat
+*.error
+.buildPatch
+rebel.xml
+YOU DO NOT HAVE A VALID JREBEL LICENSE.error
+*.txt
+.recommenders/
+.bpmn/
+127.0.1.1.tm*
+min.tm*

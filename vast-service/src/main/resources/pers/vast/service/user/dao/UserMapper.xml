@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.vast.service.user.dao.UserMapper">
+
+    <select id="selectByPo" resultType="pers.vast.service.user.entity.UserPo">
+        SELECT * FROM
+        user
+        WHERE 1 = 1
+        <if test="id != null and id != ''">
+            AND id = #{id}
+        </if>
+        <if test="account != null and account != ''">
+            AND account = #{account}
+        </if>
+        <if test="email != null and email != ''">
+            AND email = #{email}
+        </if>
+        <if test="tel != null and tel != ''">
+            AND tel = #{tel}
+        </if>
+        <if test="password != null and password != ''">
+            AND password = #{password}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,18 @@
+{
+  "projectId":"100001",
+  "name":"默认能力模板",
+  "abilities":[
+    {
+      "type":1,
+      "name":"伤害"
+    },
+    {
+      "type":1,
+      "name":"防御"
+    },
+    {
+      "type":1,
+      "name":"速度"
+    }
+  ]
+}
