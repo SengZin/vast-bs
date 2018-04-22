@@ -18,4 +18,6 @@ public class AbilityVo {
     private String name;
     // 能力类型 1：数值型
     private Integer type;
+
+    // todo tags
 }
