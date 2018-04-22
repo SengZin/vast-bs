@@ -40,7 +40,7 @@ public class AbilityManager {
      * @param projectId 项目 id
      */
     public List<AbilityPo> listByProject(long projectId) {
-        return mapper.list(ImmutableMap.of("projectId", projectId));
+        return mapper.list(ImmutableMap.of("projectId", projectId, "enable", 1));
     }
 
     /**

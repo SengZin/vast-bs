@@ -6,6 +6,7 @@ import pers.vast.entity.CollectionVo;
 import pers.vast.service.design.AbilityService;
 import pers.vast.service.design.entity.AbilityPo;
 import pers.vast.service.design.entity.AbilityTemplatePo;
+import pers.vast.service.design.util.Abilities;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,7 +43,7 @@ public class AbilityResource {
     public CollectionVo list(@RequestParam("projectId") Long projectId) {
         if (projectId == null) throw new RuntimeException("项目 id 不可为空");
         List<AbilityPo> abilities = service.list(projectId);
-        return CollectionVo.builder().rows(abilities).total(abilities.size()).build();
+        return CollectionVo.builder().rows(Abilities.poToVo(abilities)).total(abilities.size()).build();
     }
 
     @RequestMapping(method = RequestMethod.DELETE)

@@ -20,11 +20,11 @@ public interface AbilityMapper {
     @Options(useGeneratedKeys = true)
     int insert(AbilityPo po);
 
-    @Update("UPDATE unit_ability SET type = #{type}, name = #{name}, update_person = #{updatePerson}" +
+    @Update("UPDATE unit_ability SET type = #{type}, name = #{name}, update_person = #{updatePerson} " +
             "WHERE id = #{id}")
     int update(AbilityPo po);
 
-    @Update("UPDATE SET enable = #{enable}, update_person = #{operator} WHERE id = #{id}")
+    @Update("UPDATE unit_ability SET enable = #{enable}, update_person = #{operator} WHERE id = #{id}")
     int updateEnable(@Param("id") long id, @Param("enable") int enable, @Param("operator") long operator);
 
     List<AbilityPo> list(Map param);
