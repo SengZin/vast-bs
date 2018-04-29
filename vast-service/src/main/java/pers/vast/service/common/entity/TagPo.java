@@ -15,14 +15,26 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TagPo {
+    /** 通用属性 */
     private Long id;
+    private Integer enable;
+    private Long createPerson;
+    private Long updatePerson;
+    private Date createTime;
+    private Date updateTime;
+
+    /** 标签属性 */
     // 标签名
     private String name;
+    // 标签拥有者类型
+    private Integer ownerType;
+    // 拥有者 id
+    private String ownerId;
     // 业务范围
     private Integer scope;
+    // 标签颜色
+    private String color;
 
-    private Long createPerson;
-
-    private Date createTime;
-
+    /** 关系 属性 */
+    private TagRelPo rels;
 }

@@ -1,5 +1,6 @@
 package pers.vast.service.design.util;
 
+import pers.vast.service.common.util.Tags;
 import pers.vast.service.design.entity.AbilityPo;
 import pers.vast.service.design.entity.AbilityVo;
 
@@ -26,7 +27,7 @@ public class Abilities {
                 .id(po.getId())
                 .name(po.getName())
                 .type(po.getType())
-                .tags(po.getTags()).build();
+                .tags(Tags.poToVo(po.getTags())).build();
     }
 
 }

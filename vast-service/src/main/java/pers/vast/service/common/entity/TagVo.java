@@ -16,4 +16,6 @@ public class TagVo {
     private Long id;
     // 标签名
     private String name;
+    // 标签颜色
+    private String color;
 }

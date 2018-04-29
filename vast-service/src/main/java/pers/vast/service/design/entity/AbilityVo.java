@@ -1,6 +1,7 @@
 package pers.vast.service.design.entity;
 
 import lombok.*;
+import pers.vast.service.common.entity.TagVo;
 
 import java.util.Collection;
 
@@ -21,5 +22,5 @@ public class AbilityVo {
     // 能力类型 1：数值型
     private Integer type;
     // tags
-    private Collection<String> tags;
+    private Collection<TagVo> tags;
 }

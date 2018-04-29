@@ -1,6 +1,7 @@
 package pers.vast.service.design.entity;
 
 import lombok.*;
+import pers.vast.service.common.entity.TagPo;
 
 import java.util.Date;
 import java.util.List;
@@ -29,8 +30,12 @@ public class AbilityPo {
     private Date createTime;
     private Date updateTime;
 
+    /** 扩展属性 */
+    private List<TagPo> tags;
+
     /** 请求参数 */
-    private List<String> tags;
+    private List<Long> tagIds;
+
 
     // 能力模式/规则
     // todo 看看前端是怎么判断的、结合前后端选个适合的

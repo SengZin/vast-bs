@@ -3,6 +3,8 @@ package pers.vast.service.design;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pers.vast.service.common.entity.OwnerType;
+import pers.vast.service.common.entity.TagPo;
 import pers.vast.service.common.entity.TagScope;
 import pers.vast.service.common.manager.TagManager;
 import pers.vast.service.design.entity.AbilityPo;
@@ -37,19 +39,20 @@ public class AbilityService {
         });
         pos = manager.create(pos);
         // 打标签
-        pos.stream().filter(po -> po.getTags() != null).forEach(po -> tagManager.tagging(TagScope.UNIT_ABILITY, po.getId().toString(), operator, po.getTags()));
+        pos.stream().filter(po -> po.getTagIds() != null)
+                .forEach(po -> tagManager.retag(OwnerType.PROJECT, projectId.toString(), TagScope.UNIT_ABILITY, operator, po.getTagIds(), po.getId().toString()));
     }
 
     /**
      * 更新
      */
     @Transactional(rollbackFor = Throwable.class)
-    public void update(Collection<AbilityPo> pos, Long operator) {
+    public void update(Collection<AbilityPo> pos, Long operator, Long projectId) {
         if (pos == null) return;
         pos.forEach(po -> po.setUpdatePerson(operator));
         manager.update(pos);
         // 打标签
-        pos.stream().filter(po -> po.getTags() != null).forEach(po -> tagManager.tagging(TagScope.UNIT_ABILITY, po.getId().toString(), operator, po.getTags()));
+        pos.stream().filter(po -> po.getTagIds() != null).forEach(po -> tagManager.retag(OwnerType.PROJECT, projectId.toString(), TagScope.UNIT_ABILITY, operator, po.getTagIds(), po.getId().toString()));
     }
 
     /**
@@ -57,7 +60,7 @@ public class AbilityService {
      */
     public List<AbilityPo> list(Long projectId) {
         List<AbilityPo> abilities = manager.listByProject(projectId);
-        abilities.forEach(ability -> ability.setTags(tagManager.listName(TagScope.UNIT_ABILITY, ability.getId().toString())));
+        abilities.forEach(ability -> ability.setTags(tagManager.list(OwnerType.PROJECT, projectId.toString(), TagScope.UNIT_ABILITY, ability.getId().toString())));
         return abilities;
     }
 
@@ -69,4 +72,33 @@ public class AbilityService {
         manager.delete(ids, operator);
     }
 
+    /**
+     * 创建项目下的能力标签
+     */
+    @Transactional(rollbackFor= Throwable.class)
+    public void createTag(List<TagPo> tagPos, Long operator, Long projectId) {
+        tagManager.create(OwnerType.PROJECT, projectId.toString(), TagScope.UNIT_ABILITY, operator, tagPos);
+    }
+
+    /**
+     * 更新能力标签
+     */
+    @Transactional(rollbackFor= Throwable.class)
+    public void updateTag(List<TagPo> tagPos, Long operator, Long projectId) {
+        tagManager.update(OwnerType.PROJECT, projectId.toString(), TagScope.UNIT_ABILITY, operator, tagPos);
+    }
+
+    /**
+     * 查询项目下的能力标签
+     */
+    public List<TagPo> listTag(Long projectId) {
+        return tagManager.list(OwnerType.PROJECT, projectId.toString(), TagScope.UNIT_ABILITY);
+    }
+
+    /**
+     * 删除标签
+     */
+    public void deleteTag(List<Long> tagIds, Long operator, Long projectId) {
+        tagManager.delete(OwnerType.PROJECT, projectId.toString(), TagScope.UNIT_ABILITY, operator, tagIds);
+    }
 }

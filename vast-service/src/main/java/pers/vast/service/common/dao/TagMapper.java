@@ -6,6 +6,7 @@ import pers.vast.service.common.entity.TagRelPo;
 import pers.vast.service.common.entity.TagVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 标签
@@ -14,30 +15,41 @@ import java.util.List;
 @Mapper
 public interface TagMapper {
 
-    @Insert("INSERT INTO tag(scope, name, create_person, create_time) " +
-            "VALUES(#{scope}, #{name}, #{createPerson}, #{createTime})")
+    @Insert("INSERT INTO tag(name, owner_type, owner_id, scope, color, create_person, create_time) " +
+            "VALUES( #{name}, #{ownerType}, #{ownerId}, #{scope}, #{color}, #{createPerson}, #{createTime})")
     @Options(useGeneratedKeys = true)
     int insert(TagPo po);
 
-    @Select("SELECT * FROM tag WHERE scope = #{scope} AND name = #{name} limit 1")
-    TagPo select(@Param("scope") Integer scope, @Param("name") String name);
+    @Update("UPDATE tag SET name = #{name}, color = #{color}, update_person = #{updatePerson} WHERE id = #{id}")
+    int update(@Param("id") long id, @Param("name") String name, @Param("color") String color, @Param("updatePerson") long updatePerson);
 
-//    @Select("SELECT * FROM tag WHERE")
-//    List<TagPo> list(String bizId);
+    @Update("UPDATE tag SET enable = #{enable} WHERE id = #{id}")
+    int updateEnable(@Param("id") long id, @Param("enable") String enable);
+
+    TagPo select(Map param);
+
+    List<TagPo> list(Map param);
+    // 连表查询
+    List<TagPo> listWithJoin(Map param);
 
     /** 标签关系 */
 
-    @Insert("INSERT INTO tag_rel(biz_id, tag_id, create_person, create_time, update_person) " +
-            "VALUES(#{bizId}, #{tagId}, #{createPerson}, #{createTime}, #{createPerson})")
+    TagRelPo selectRel(Map param);
+
+    @Insert("INSERT INTO tag_rel(biz_id, tag_id, create_person, create_time) " +
+            "VALUES(#{bizId}, #{tagId}, #{createPerson}, #{createTime})")
     int insertRel(TagRelPo po);
 
     @Update("UPDATE tag_rel SET enable = #{enable}, update_person = #{operator} WHERE biz_id = #{bizId} AND tag_id = #{tagId}")
     int updateRelEnable(@Param("bizId") String bizId, @Param("tagId") long tagId, @Param("enable") int enable, @Param("name") long operator);
 
-    @Select("SELECT t.name " +
-            "FROM tag_rel tr " +
-            "LEFT JOIN tag t ON t.id = tr.tag_id " +
-            "WHERE tr.biz_id = #{bizId} AND tr.enable = 1 AND t.scope = #{scope}")
-    List<String> listName(@Param("bizId") String bizId, @Param("scope") Integer scope);
+    @Update("UPDATE tag_rel SET enable = #{enable} WHERE id = #{id}")
+    int updateRelEnableById(@Param("id") long id, @Param("enable") String enable);
+
+    @Update("UPDATE tag_rel SET enable = #{enable} WHERE tag_id = #{tagId}")
+    int updateRelEnableByTagId(@Param("tagId") long tagId, @Param("enable") String enable);
+
+    @Update("UPDATE tag_rel SET enable = #{enable} WHERE biz_id = #{bizId}")
+    int updateRelEnableByBizId(@Param("bizId") String bizId, @Param("enable") String enable);
 
 }
