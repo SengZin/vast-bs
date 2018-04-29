@@ -25,7 +25,8 @@ public class Abilities {
         return AbilityVo.builder()
                 .id(po.getId())
                 .name(po.getName())
-                .type(po.getType()).build();
+                .type(po.getType())
+                .tags(po.getTags()).build();
     }
 
 }

@@ -2,6 +2,8 @@ package pers.vast.service.design.entity;
 
 import lombok.*;
 
+import java.util.Collection;
+
 /**
  * 单位能力
  * Created by sengzin on 2018/4/17.
@@ -18,6 +20,6 @@ public class AbilityVo {
     private String name;
     // 能力类型 1：数值型
     private Integer type;
-
-    // todo tags
+    // tags
+    private Collection<String> tags;
 }

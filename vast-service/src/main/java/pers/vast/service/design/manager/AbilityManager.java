@@ -22,9 +22,10 @@ public class AbilityManager {
     /**
      * 创建能力
      */
-    public void create(Collection<AbilityPo> pos) {
-        if (pos == null) return;
+    public Collection<AbilityPo> create(Collection<AbilityPo> pos) {
+        if (pos == null) return null;
         pos.forEach(mapper::insert);
+        return pos;
     }
 
     /**

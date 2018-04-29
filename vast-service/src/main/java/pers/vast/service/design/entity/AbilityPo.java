@@ -3,6 +3,7 @@ package pers.vast.service.design.entity;
 import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 单位能力
@@ -27,6 +28,10 @@ public class AbilityPo {
     private Long updatePerson;
     private Date createTime;
     private Date updateTime;
+
+    /** 请求参数 */
+    private List<String> tags;
+
     // 能力模式/规则
     // todo 看看前端是怎么判断的、结合前后端选个适合的
     // 可参考 json schema
