@@ -117,7 +117,7 @@ public class TagManager {
             Preconditions.checkState(Objects.equals(ownerId, po.getOwnerId()), "标签“%s（%s）”ownerId不符合，不可使用", name, tagId);
             Preconditions.checkState(Objects.equals(scope.getId(), po.getScope()), "标签“%s（%s）”scope不符合，不可使用", name, tagId);
             Preconditions.checkState(po.getEnable() == 1, "标签“%s（%s）”状态无效，不可使用", name, tagId);
-            TagRelPo relPo = mapper.selectRel(ImmutableMap.of("bizId", "", "tagId", tagId));
+            TagRelPo relPo = mapper.selectRel(ImmutableMap.of("bizId", bizId, "tagId", tagId));
             if (relPo == null) {
                 // 新建关系
                 relPo = TagRelPo.builder()
