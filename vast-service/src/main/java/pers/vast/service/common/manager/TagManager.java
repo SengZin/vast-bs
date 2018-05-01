@@ -36,7 +36,7 @@ public class TagManager {
         tagPos.forEach(tagPo -> {
             // 添加标签定义
             String name = tagPo.getName();
-            TagPo tag = mapper.select(ImmutableMap.of("ownerType", ownerType.getId(), "ownerId", ownerId, "scope", scope.getId(), "name", name, "enable", "1"));
+            TagPo tag = mapper.select(ImmutableMap.of("ownerType", ownerType.getId(), "ownerId", ownerId, "scope", scope.getId(), "name", name));
             Preconditions.checkState(tag == null || tag.getEnable() == 0,"标签“%s”已经存在，新建失败", name);
             if (tag == null) {
                 // 没有相同的标签
