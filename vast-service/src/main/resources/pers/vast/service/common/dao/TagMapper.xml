@@ -51,6 +51,7 @@
         LEFT JOIN tag_rel tr ON tr.tag_id = t.id
         WHERE 1 = 1
         <if test="enable != null and enable != ''">
+            AND tr.enable = #{enable}
             AND t.enable = #{enable}
         </if>
         <if test="ownerType != null and ownerType != ''">
