@@ -14,7 +14,6 @@
         <java.version>1.8</java.version>
         <start-class>pers.vast.VastApiApplication</start-class>
         <vast-service.version>1.0-SNAPSHOT</vast-service.version>
-        <vast-project.version>1.0-SNAPSHOT</vast-project.version>
     </properties>
 
     <dependencies>
@@ -23,11 +22,6 @@
             <artifactId>vast-service</artifactId>
             <version>${vast-service.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>pers.vast</groupId>-->
-            <!--<artifactId>vast-project</artifactId>-->
-            <!--<version>${vast-project.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
