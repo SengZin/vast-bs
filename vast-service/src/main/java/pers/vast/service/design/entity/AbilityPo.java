@@ -1,5 +1,6 @@
 package pers.vast.service.design.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 import pers.vast.service.common.entity.TagPo;
 
@@ -16,6 +17,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+//@JsonSerialize(include= JsonSerialize.Inclusion.NON_NULL)
 public class AbilityPo {
     private Long id;
     // 能力类型
@@ -32,6 +34,7 @@ public class AbilityPo {
 
     /** 扩展属性 */
     private List<TagPo> tags;
+    private Long value;
 
     /** 请求参数 */
     private List<Long> tagIds;
