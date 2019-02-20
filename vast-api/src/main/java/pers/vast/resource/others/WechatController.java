@@ -33,7 +33,8 @@ public class WechatController {
         log.info("{} GET 请求", uuid);
         Map<String, String[]> params = request.getParameterMap();
         log.info("{} params = {}", uuid, om.writerWithDefaultPrettyPrinter().writeValueAsString(params));
-        return "success";
+        String echostr = request.getParameter("echostr");
+        return echostr != null ? echostr : "success";
     }
 
     /**
