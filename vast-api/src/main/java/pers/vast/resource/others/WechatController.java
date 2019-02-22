@@ -5,6 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import weixin.popular.bean.message.EventMessage;
+import weixin.popular.bean.xmlmessage.XMLMessage;
+import weixin.popular.bean.xmlmessage.XMLTextMessage;
 import weixin.popular.util.XMLConverUtil;
 
 import javax.servlet.ServletInputStream;
@@ -55,6 +57,14 @@ public class WechatController {
         if (inputStream != null) {
             EventMessage eventMessage = XMLConverUtil.convertToObject(EventMessage.class, inputStream);
             log.info("{} body = {}", uuid, om.writerWithDefaultPrettyPrinter().writeValueAsString(eventMessage));
+
+            //创建回复
+            XMLMessage xmlTextMessage = new XMLTextMessage(
+                    eventMessage.getFromUserName(),
+                    eventMessage.getToUserName(),
+                    "你好");
+
+            return xmlTextMessage.toXML();
         } else {
             log.info("{} body = null");
         }
